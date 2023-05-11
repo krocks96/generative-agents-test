@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  # speech:
+  #   build: ./speech-recording-server
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     - ./speech-recording-server/app:/app
+  #   environment:
+  #     OPENAI_API_KEY: $OPENAI_API_KEY
+  agent:
+    build: ./ai-agent-server
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./ai-agent-server/app:/app
+    tty: true
+    environment:
+      OPENAI_API_KEY: $OPENAI_API_KEY
