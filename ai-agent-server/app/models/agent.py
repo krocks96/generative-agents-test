@@ -8,9 +8,9 @@ from langchain.docstore import InMemoryDocstore
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.retrievers import TimeWeightedVectorStoreRetriever
 from langchain.vectorstores import FAISS
-# from models.generative_agent import GenerativeAgent
-# from models.memory import GenerativeAgentMemory
-from langchain.experimental.generative_agents import GenerativeAgent, GenerativeAgentMemory
+from models.generative_agent import GenerativeAgent
+from models.memory import GenerativeAgentMemory
+# from langchain.experimental.generative_agents import GenerativeAgent, GenerativeAgentMemory
 
 API_KEY=os.environ["OPENAI_API_KEY"]
 LLM = ChatOpenAI(max_tokens=1500, openai_api_key=API_KEY)
@@ -48,7 +48,8 @@ class Agent:
                     memory=memory
                 )
         # 初期記憶
-        self.add_memory(data.memory)
+        if data.memory != "":
+            self.add_memory(data.memory)
             
     def get_summary(self):
         return self.agent.get_summary(force_refresh=True)
